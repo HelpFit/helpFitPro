@@ -95,5 +95,4 @@ public class EventHttpService {
     public APPResponse delete() {
         return new APPResponse(service.deleteAll());
     }
-
 }

@@ -94,24 +94,34 @@ public class EventDocumentParser {
 
 	public static Event convertDocumentToEvent(Document item){
 
-		List<Integer> ailmentInts = (List<Integer>) item.get("ailmentTags");
+		List<Double> ailmentInts = (List<Double>) item.get("ailmentTags");
 		List<Ailment> ailmentTags = new ArrayList<Ailment>();
-		for(Integer ailment: ailmentInts){
+		for(int i=0;i<ailmentInts.size();i++){
+			Double ailment = ailmentInts.get(i);
+			ailmentTags.add(Ailment.getAilment(ailment.intValue()));
+		}
+		/*for(Integer ailment: ailmentInts.in){
 			ailmentTags.add(Ailment.getAilment(ailment));
-		}
-
-		List<Integer> interestInts = (List<Integer>) item.get("interestTags");
+		}*/
+		List<Double> interestInts = (List<Double>) item.get("interestTags");
 		List<Interest> interestTags = new ArrayList<Interest>();
-		for(Integer interest: interestInts){
+		for(int i=0;i<interestInts.size();i++){
+			Double interest = interestInts.get(i);
+			interestTags.add(Interest.getInterest(interest.intValue()));
+		}
+		/*for(Integer interest: interestInts){
 			interestTags.add(Interest.getInterest(interest));
-		}
+		}*/
 
-
-		List<Integer> habitInts = (List<Integer>) item.get("habitTags");
+		List<Double> habitInts = (List<Double>) item.get("habitTags");
 		List<Habit> habitTags = new ArrayList<Habit>();
-		for(Integer habit: habitInts){
-			habitTags.add(Habit.getHabit(habit));
+		for(int i=0;i<habitInts.size();i++){
+			Double habits = habitInts.get(i);
+			habitTags.add(Habit.getHabit(habits.intValue()));
 		}
+		/*for(Integer habit: habitInts){
+			habitTags.add(Habit.getHabit(habit));
+		}*/
 
 		Event event = new Event(
 				item.getString("name"),
@@ -137,6 +147,37 @@ public class EventDocumentParser {
 	}
 
 	public static Document convertEventToDocument(Event event){
+
+		ArrayList<Integer> ailmentTags = new ArrayList<Integer>();
+		List<Ailment> ailmentVal = event.getAilmentTags();
+		if(ailmentVal != null){
+			for(int i=0;i<ailmentVal.size();i++){
+				Ailment val = ailmentVal.get(i);
+				if(val.getId() != null)
+					ailmentTags.add(val.getId());
+			}
+		}
+
+		ArrayList<Integer> interestTags = new ArrayList<Integer>();
+		List<Interest> interestVal = event.getInterestTags();
+		if(interestVal != null){
+			for(int i=0;i<interestVal.size();i++){
+				Interest val = interestVal.get(i);
+				if(val.getId() != null)
+					interestTags.add(val.getId());
+			}
+		}
+
+		ArrayList<Integer> habitTags = new ArrayList<Integer>();
+		List<Habit> habitVal = event.getHabitTags();
+		if(habitVal != null){
+			for(int i=0;i<habitVal.size();i++){
+				Habit val = habitVal.get(i);
+				if(val.getId() != null)
+					habitTags.add(val.getId());
+			}
+		}
+
 		Document doc = new Document("name", event.getName())
 				.append("description", event.getDescription())
 				.append("venue", event.getVenue())
@@ -148,9 +189,9 @@ public class EventDocumentParser {
 				.append("endTime", event.getEndTime())
 				.append("organizerId", event.getOrganizerId())
 				.append("ticketPrice", event.getTicketPrice())
-				.append("ailmentTags", event.getAilmentTags())
-				.append("interestTags", event.getInterestTags())
-				.append("habitTags", event.getHabitTags())
+				.append("ailmentTags", ailmentTags)
+				.append("interestTags", interestTags)
+				.append("habitTags", habitTags)
 				.append("isActive", event.getIsActive())
 				.append("isOpen", event.getIsOpen())
 				.append("timeCreated", event.getTimeCreated())

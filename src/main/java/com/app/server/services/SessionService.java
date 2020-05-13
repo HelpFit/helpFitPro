@@ -143,7 +143,6 @@ public class SessionService {
         if (!json.has("adminCode"))
             throw new APPBadRequestException(55, "Admin code is missing");
         if(!json.getString("adminCode").equals("76876811")) {
-            //TODO: The Admin code has to be configured securely in the final submission of the project
             throw new APPBadRequestException(55, "Account creation Denied");
         }
         return userService.create(request, true);

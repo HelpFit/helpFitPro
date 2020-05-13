@@ -46,7 +46,7 @@ public class EventOrganizerService {
 
     public static EventOrganizerService getInstance(){
         if (instance == null) {
-            synchronized (EventOrganizerService .class) {
+            synchronized (EventOrganizerService.class) {
                 if (instance == null) {
                     instance = new EventOrganizerService();
                 }

@@ -37,7 +37,6 @@ public class EventOrganizerHttpService {
     @GET
     @Produces({ MediaType.APPLICATION_JSON})
     public APPResponse getAll() {
-
         return new APPResponse(organizerService.getAllEventOrganizers());
     }
 

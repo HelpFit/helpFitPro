@@ -4,6 +4,7 @@ import com.app.server.http.exceptions.APPBadRequestException;
 import com.app.server.http.exceptions.APPInternalServerException;
 import com.app.server.http.exceptions.APPUnauthorizedException;
 import com.app.server.models.HealthRegime.Regime;
+import com.app.server.models.HealthRegime.RegimeProgram;
 import com.app.server.util.MongoPool;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,7 +38,6 @@ public class RegimeService {
     private RegimeService() {
         this.regimeCollection = MongoPool.getInstance().getCollection("regime");
         ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-
     }
 
     public static RegimeService getInstance(){
@@ -85,6 +85,13 @@ public class RegimeService {
         }
         return regimeList;
     }
+
+    public ArrayList<String> getRegimeInRegimeProgram(List<RegimeProgram> regimePrograms){
+           ArrayList<String> regimes = new ArrayList<String>();
+           regimes = (ArrayList<String>) regimePrograms.get(0).getRegimesID();
+       return regimes;
+    }
+
 
     public Object getRegimeForOneRegimeProgramWhenSubresource(List<String> regimesID, String idTwo, Object request){
         List<Regime> regimeList = new ArrayList<Regime>();

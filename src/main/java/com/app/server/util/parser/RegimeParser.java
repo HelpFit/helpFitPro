@@ -30,7 +30,7 @@ public class RegimeParser {
         List<String> ailments = (List<String>) item.get("ailmentTags");
         List<String> interests = (List<String>) item.get("interestTags");
         List<String> habits = (List<String>) item.get("habitsTags");
-        Regime regime = new Regime(item.getObjectId("_id").toString(),item.getString("helpFitID"),
+        Regime regime = new Regime(item.getString("helpFitID"),
                 item.getString("name"),
                 item.getString("description"),
                 item.getString("regimeType"),
@@ -41,13 +41,14 @@ public class RegimeParser {
                 item.getString("isActive"),
                 item.getString("timeCreated"),
                 item.getString("timeUpdated"));
+        regime.setId(item.getObjectId("_id").toString());
         return regime;
     }
 
     public static Regime convertJsonToRegime(JSONObject json){
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = new Date();
-        Regime regime = new Regime( json.getString("id"),
+        Regime regime = new Regime(
                 json.getString("helpFitID"),
                 json.getString("name"),
                 json.getString("description"),
@@ -59,6 +60,7 @@ public class RegimeParser {
                 json.getString("isActive"),
                 json.has("timeCreated")?json.getString("isFulfilled"): String.valueOf(Instant.now().getEpochSecond()),
                 String.valueOf(Instant.now().getEpochSecond()));
+        regime.setId(json.getString("id"));
         return regime;
     }
 

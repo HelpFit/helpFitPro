@@ -81,42 +81,4 @@ public class UserHttpService {
     public APPResponse delete() {
         return new APPResponse(service.deleteAll());
     }
-
-    @POST
-    @Path("{id}/transactions")
-    @Consumes({ MediaType.APPLICATION_JSON})
-    @Produces({ MediaType.APPLICATION_JSON})
-    public APPResponse createTranscation(@Context HttpHeaders headers, @PathParam("id") String id, Object request) {
-        return new APPResponse(service.createTranscation(headers, id, request));
-    }
-
-    @GET
-    @Path("{id}/transactions")
-    @Produces({ MediaType.APPLICATION_JSON})
-    public APPResponse getUserTransactions(@Context HttpHeaders headers,@PathParam("id") String id) {
-        return new APPResponse(service.getUserTransactions(headers, id));
-    }
-
-    @GET
-    @Path("{id}/regimeProgram")
-    @Produces({ MediaType.APPLICATION_JSON})
-    public APPResponse getUserRegimeProgram(@Context HttpHeaders headers,@PathParam("id") String id) {
-        return new APPResponse(service.getUserRegimeProgram(headers, id));
-    }
-
-    @POST
-    @Path("{id}/regimeProgram")
-    @Consumes({ MediaType.APPLICATION_JSON})
-    @Produces({ MediaType.APPLICATION_JSON})
-    public APPResponse createUserRegimeProgram(@Context HttpHeaders headers, @PathParam("id") String id, Object request) {
-        return new APPResponse(service.createUserRegimeProgram(headers, id, request));
-    }
-
-    @DELETE
-    @Path("{id}/regimeProgram")
-    @Produces({ MediaType.APPLICATION_JSON})
-    public APPResponse delete(@Context HttpHeaders headers, @PathParam("id") String id) {
-        return new APPResponse(service.deleteUserRegimeProgram(headers, id));
-    }
-
 }

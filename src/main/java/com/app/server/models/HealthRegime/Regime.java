@@ -18,8 +18,7 @@ public class Regime {
     String timeCreated;
     String timeUpdated;
 
-    public Regime(String id, String helpFitID, String name, String description, String regimeType, String timeRequiredWeeks, List<String> ailmentTags, List<String> insterestTags, List<String> habitsTags, String isActive, String timeCreated, String timeUpdated) {
-        this.id = id;
+    public Regime(String helpFitID, String name, String description, String regimeType, String timeRequiredWeeks, List<String> ailmentTags, List<String> insterestTags, List<String> habitsTags, String isActive, String timeCreated, String timeUpdated) {
         this.helpFitID = helpFitID;
         this.name = name;
         this.description = description;
